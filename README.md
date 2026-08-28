@@ -213,12 +213,6 @@ Keep those two files together.
 
 Launch BeamNG.drive normally.
 
-For the exact currently supported build, the game executable should report:
-
-0.39.4.0.20972
-
-BeamOpt has exact-build guards and should refuse to patch an unexpected executable.
-
 4. Start the BeamOpt native bridge
 
 After BeamNG is running, run:
