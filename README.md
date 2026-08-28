@@ -177,7 +177,7 @@ Example layout:
 usual install path
 └── BeamNG.drive
     └── mods
-        └── BeamOpt_v3_8_1_AUTO_MIRROR_PROFILE_EXPERIMENTAL.zip
+        └── BeamOpt_v3_8_1.zip
 
 If your BeamNG user folder is somewhere else, use that folder's normal mods directory instead.
 
