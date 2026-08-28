@@ -1,4 +1,4 @@
-This mod was heavily influenced by chatgpt.
+This mod was heavily influenced by chatgpt. this mod can induce flashing lights/textures on its lower settings. please use carefully.
 
 BeamOpt
 
@@ -8,7 +8,7 @@ The mod uses a normal BeamNG Lua/UI component plus a Windows PowerShell native b
 
 Current tested target: BeamNG.drive 0.39.4.0.20972 Win64
 Tested renderers: Direct3D 11, Direct3D 12, Vulkan
-Recommended renderer for maximum gain: Direct3D 11
+Recommended renderer: Direct3D 12
 
 Performance results
 
@@ -16,45 +16,33 @@ Performance varies by map, vehicle, camera, graphics settings, CPU/GPU balance, 
 
 Renderer / view
 
-BeamOpt off
-
-BeamOpt on
+BeamOpt off / BeamOpt on
 
 Gain
 
 DX11, interior
 
-24.5 FPS
-
-~36 FPS
+24.5 FPS to ~36 FPS
 
 +11.5 FPS / +46.9%
 
 DX11, exterior
 
-32.2–32.5 FPS
-
-41–44 FPS
+32.2–32.5 FPS to 41–44 FPS
 
 ~+26% to +37%
 
 DX12
 
-35.8 FPS
-
-38.6 FPS
+35.8 FPS to 38.6 FPS
 
 +2.8 FPS / +7.8%
 
 Vulkan
 
-33.5 FPS
-
-35.5 FPS
+33.5 FPS to 35.5 FPS
 
 +2.0 FPS / +6.0%
-
-The largest measured improvement was on Direct3D 11, especially in interior view where native mirrors and shadows were a major CPU/render-thread cost.
 
 Shadow-rate testing
 
@@ -82,15 +70,7 @@ It synchronizes the main world-shadow atlas clear and world-cascade render at th
 
 Available world-shadow rates:
 
-Native
-
-1/2
-
-1/3
-
-1/4
-
-1/5
+Native, 1/2, 1/3, 1/4, 1/5
 
 This avoids the severe black/flickering shadow failures that occurred with early whole-pass frame skipping.
 
@@ -106,11 +86,9 @@ Enabled by default.
 
 World caster mask 0x100
 
-The normal world PSSM cascade caster mask is changed from 0x300 to 0x100.
+The normal world PSSM cascade caster mask is changed from 0x300 to 0x100. This produced an additional measured performance improvement while retaining the important tested world shadows.
 
-This produced an additional measured performance improvement while retaining the important tested world shadows.
-
-Enabled by default.
+Enabled by default. may cause flashing when opening and closing the map.
 
 Optional 3-split PSSM mode
 
@@ -124,15 +102,7 @@ Mirror scheduling
 
 Vehicle mirror CubeReflectors can run at:
 
-Native
-
-1/2
-
-1/3
-
-1/4
-
-1/5
+Native, 1/2, 1/3, 1/4, 1/5
 
 Mirror updates are phase-staggered to avoid updating every reflector on the same frame.
 
@@ -166,29 +136,13 @@ Vehicle body/dynamic CubeReflector updates can be reduced independently from mir
 
 Available rates:
 
-Native
-
-1/2
-
-1/3
-
-1/4
-
-1/5
+Native, 1/2, 1/3, 1/4, 1/5
 
 Planar reflections
 
 PlaneReflector updates can also be scheduled independently:
 
-Native
-
-1/2
-
-1/3
-
-1/4
-
-1/5
+Native, 1/2, 1/3, 1/4, 1/5
 
 Low-I/O bridge
 
@@ -220,7 +174,7 @@ I recommend keeping the BeamNG user folder somewhere easy to access, such as on 
 
 Example layout:
 
-Desktop
+usual install path
 └── BeamNG.drive
     └── mods
         └── BeamOpt_v3_8_1_AUTO_MIRROR_PROFILE_EXPERIMENTAL.zip
@@ -380,15 +334,7 @@ Early versions skipped the whole ShadowMapPass.
 
 That gave large FPS improvements but caused:
 
-black/flashing world shadows,
-
-stale near-cascade coverage,
-
-vehicle-shadow judder,
-
-high-speed/low-render-distance flicker.
-
-The final selective PSSM scheduler was developed specifically to avoid those problems.
+black/flashing world shadows, stale near-cascade coverage, vehicle-shadow judder, high-speed/low-render-distance flicker. The final selective PSSM scheduler was developed specifically to avoid those problems.
 
 How the selective shadow scheduler works
 
@@ -402,9 +348,7 @@ PSSMLightShadowMap::_render
     world render-state cleanup
     dedicated VehicleShadowTex path
 
-The production scheduler keeps the dedicated vehicle-shadow path full-rate while pairing the expensive world atlas clear and world cascade rendering on the same update phase.
-
-This is why it can reduce world-shadow work without simply making every shadow—including the vehicle shadow—update at the reduced rate.
+The production scheduler keeps the dedicated vehicle-shadow path full-rate while pairing the expensive world atlas clear and world cascade rendering on the same update phase. This is why it can reduce world-shadow work without simply making every shadow—including the vehicle shadow—update at the reduced rate.
 
 Safety / experimental status
 
@@ -412,17 +356,7 @@ BeamOpt is an experimental reverse-engineered performance mod.
 
 It:
 
-opens the BeamNG process,
-
-reads native object state,
-
-allocates small executable trampoline pages,
-
-patches selected native instructions in RAM,
-
-restores the original bytes when disabled or closed normally.
-
-It does not permanently modify BeamNG.drive.x64.exe on disk.
+opens the BeamNG process, reads native object state, allocates small executable trampoline pages, patches selected native instructions in RAM, restores the original bytes when disabled or closed normally.It does not permanently modify BeamNG.drive.x64.exe on disk.
 
 Use it at your own risk and keep normal backups of your BeamNG user folder/mod configuration.
 
@@ -433,11 +367,11 @@ Target: BeamNG.drive 0.39.4.0.20972 Win64
 
 Current recommended baseline:
 
-DX11
+DX12
 World Shadows 1/2
 PSSM 6.0 ON
 World Caster Mask 0x100 ON
-4 PSSM splits
+3 PSSM splits
 Auto interior/exterior mirror profile ON
 Interior mirrors 1/2
 
