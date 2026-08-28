@@ -166,7 +166,10 @@ World Caster Mask 0x100:  ON
 
 Start from this configuration, then test the reflection controls individually for your vehicle/map.
 
-Installation
+
+
+
+    Installation
 
 Recommended install location
 
